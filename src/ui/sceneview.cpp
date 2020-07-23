@@ -36,6 +36,8 @@ void SceneView::mousePressEvent(QMouseEvent *event)
 			break;
 		}
 	}
+//	if (!draggedObj.valid())
+//		draggedObj = scroller();
 	if (onChanged) onChanged();
 }
 
@@ -49,7 +51,7 @@ void SceneView::mouseMoveEvent(QMouseEvent *event)
 {
 	if (draggedObj.valid()) {
 		auto scanLine = fromQPoint(event->pos());
-		draggedObj.set(scanLine.projectedPoint(draggedObj.get()));
+		draggedObj.set(scene.getWall().getPoint(scanLine));
 	}
 	if (onChanged) onChanged();
 }
@@ -145,7 +147,9 @@ void SceneView::drawHuman()
 
 void SceneView::drawWall()
 {
-
+	auto points = scene.getWall().points();
+	for (int i = 0; i < points.size(); i++)
+		drawLine(points[i], points[(i + 1) % points.size()]);
 }
 
 void SceneView::drawBackground()

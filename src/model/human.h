@@ -21,6 +21,7 @@ public:
 	double mass() const override;
 
 	Vector point(size_t index) const override;
+	std::vector<VectorProxy> contactPoints();
 	std::vector<VectorProxy> controlPoints();
 
 private:

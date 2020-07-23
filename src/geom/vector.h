@@ -11,9 +11,9 @@ public:
 	Vector();
 	Vector(double x, double y, double z);
 	static Vector Ident();
-	static Vector X(double value);
-	static Vector Y(double value);
-	static Vector Z(double value);
+	static Vector X(double value = 1.0);
+	static Vector Y(double value = 1.0);
+	static Vector Z(double value = 1.0);
 	double x() const;
 	double y() const;
 	double z() const;

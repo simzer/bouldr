@@ -33,9 +33,10 @@ Vector Human::point(size_t index) const
 	else return right.arm.end.position;
 }
 
-std::vector<VectorProxy> Human::controlPoints()
+std::vector<VectorProxy> Human::contactPoints()
 {
 	std::vector<VectorProxy> res;
+
 	res.push_back(VectorProxy(
 		[&](){ return left.leg.end.position; },
 		[&](const Vector &v) { left.leg.end.position = v; }
@@ -55,6 +56,13 @@ std::vector<VectorProxy> Human::controlPoints()
 		[&](){ return right.arm.end.position; },
 		[&](const Vector &v) { right.arm.end.position = v; }
 	));
+
+	return res;
+}
+
+std::vector<VectorProxy> Human::controlPoints()
+{
+	auto res = contactPoints();
 
 	res.push_back(VectorProxy(
 		[&](){ return CoG(); },

@@ -15,7 +15,19 @@ Human Scene::getHuman() const
 	return human;
 }
 
+Wall Scene::getWall() const
+{
+	return wall;
+}
+
 std::vector<VectorProxy> Scene::controlPoints()
 {
 	return human.controlPoints();
+}
+
+void Scene::validate()
+{
+	for (auto &point : human.contactPoints()) {
+		wall.putOnto(point);
+	}
 }
